@@ -200,6 +200,10 @@ pub async fn enumerate_entities_for_device<'a>(
                     entities.add(TargetTemperatureEntity::new(&d, state, cap).await?);
                 }
 
+                DeviceCapabilityKind::Other(ref s) if s == "devices.capabilities.movie_setting" => {
+                    // Ignore movieMode capability (not yet supported)
+                }
+
                 kind => {
                     log::warn!(
                         "Do something about {kind:?} {} for {d} {cap:?}",
